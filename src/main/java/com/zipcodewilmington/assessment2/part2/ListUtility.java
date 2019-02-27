@@ -1,14 +1,25 @@
 package com.zipcodewilmington.assessment2.part2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListUtility {
+    private List test;
+
+    public ListUtility() {
+        this.test = new ArrayList();
+    }
+
     public Boolean add(int i) {
-        return null;
+        if(contains(i)) {
+            return true;
+        }
+        test.add(i);
+        return false;
     }
 
     public Integer size() {
-        return null;
+        return test.size();
     }
 
     public List<Integer> getUnique() {
@@ -24,6 +35,9 @@ public class ListUtility {
     }
 
     public Boolean contains(Integer valueToAdd) {
-        return null;
+        if(test.contains(valueToAdd)) {
+            return true;
+        }
+        return false;
     }
 }
