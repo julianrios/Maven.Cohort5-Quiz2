@@ -1,9 +1,8 @@
 package com.zipcodewilmington.assessment2.part2;
 
-import com.j256.ormlite.stmt.query.In;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
+import java.util.Collections;
 
 public class ArrayUtility {
     public Integer[] merge(Integer[] array1, Integer[] array2) {
@@ -13,7 +12,7 @@ public class ArrayUtility {
     }
 
     public Integer[] rotate(Integer[] array, Integer index) {
-        return null;
+        return merge(Arrays.copyOfRange(array, index, array.length), Arrays.copyOfRange(array, 0, index));
     }
 
     public Integer countOccurrence(Integer[] array1, Integer[] array2, Integer valueToEvaluate) {
@@ -22,25 +21,43 @@ public class ArrayUtility {
         return totalCountOccurrence;
     }
 
+    public Integer countOccurrence(Integer[] array1, Integer valueToEvaluate) {
+        return Collections.frequency(Arrays.asList(array1), valueToEvaluate);
+    }
+
     public Integer mostCommon(Integer[] array) {
-        int count = 1;
-        int tempCount = 0;
-        Integer popular = array[0];
-        Integer temp = null;
-        for (int i = 0; i < array.length-1; i ++) {
-            temp = array[i];
-            tempCount = 0;
-            for (int j = 1; j < array.length; j++) {
-                if(temp.equals(array[j])) {
-                    tempCount++;
-                }
-                if (tempCount > count) {
-                    popular = temp;
-                    count = tempCount;
+        Integer mostCommon = array[0];
+        Integer mostCommonCOunt = 0;
+        for(Integer number : array) {
+            int occurences = countOccurrence(array, number);
+                if(occurences > mostCommonCOunt) {
+                    mostCommon = number;
+                    mostCommonCOunt = occurences;
                 }
             }
-        }
-        return popular;
+        return mostCommon;
+
+
+
+
+//        int count = 1;
+//        int tempCount = 0;
+//        Integer popular = array[0];
+//        Integer temp = null;
+//        for (int i = 0; i < array.length-1; i ++) {
+//            temp = array[i];
+//            tempCount = 0;
+//            for (int j = 1; j < array.length; j++) {
+//                if(temp.equals(array[j])) {
+//                    tempCount++;
+//                }
+//                if (tempCount > count) {
+//                    popular = temp;
+//                    count = tempCount;
+//                }
+//            }
+//        }
+//        return popular;
     }
 
     Integer getNumberOfOccurrences(Object[] objectArray, Object objectToCount) {

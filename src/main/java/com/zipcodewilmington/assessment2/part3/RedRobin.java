@@ -8,7 +8,7 @@ public class RedRobin extends Bird{
 
     @Override
     public int getSpeed() {
-        return 3;
+        return 10;
     }
 
     @Override

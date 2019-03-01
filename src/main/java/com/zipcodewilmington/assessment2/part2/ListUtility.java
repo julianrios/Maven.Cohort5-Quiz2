@@ -1,21 +1,20 @@
 package com.zipcodewilmington.assessment2.part2;
 
+import com.j256.ormlite.stmt.query.In;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ListUtility {
-    private List test;
+    private List<Integer> test;
 
     public ListUtility() {
         this.test = new ArrayList();
     }
 
-    public Boolean add(int i) {
-        if(contains(i)) {
-            return true;
-        }
-        test.add(i);
-        return false;
+    public Boolean add(Integer i) {
+        return test.add(i);
     }
 
     public Integer size() {
@@ -23,15 +22,18 @@ public class ListUtility {
     }
 
     public List<Integer> getUnique() {
-        return null;
+        return new ArrayList<>(new HashSet<>(test));
     }
 
     public String join() {
-        return null;
+        String formatNumber = test.toString();
+        return formatNumber.substring(1,formatNumber.length()-1);
     }
 
     public Integer mostCommon() {
-        return null;
+        Integer[] convertedList = test.toArray(new Integer[0]);
+        ArrayUtility arrayUtil = new ArrayUtility();
+        return arrayUtil.mostCommon(convertedList);
     }
 
     public Boolean contains(Integer valueToAdd) {

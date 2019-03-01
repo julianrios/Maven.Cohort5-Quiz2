@@ -4,11 +4,8 @@ import java.util.Comparator;
 
 public class SpeedComparator implements Comparator<Animal> {
 
-    public SpeedComparator() {
-    }
-
     @Override
-    public int compare(Animal o1, Animal o2) {
-        return o1.getSpeed()-o2.getSpeed();
+    public int compare(Animal animalOne, Animal animalTwo) {
+        return animalTwo.getSpeed()-animalOne.getSpeed();
     }
 }

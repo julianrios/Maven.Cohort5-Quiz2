@@ -3,7 +3,7 @@ package com.zipcodewilmington.assessment2.part3;
 public class BlueJay extends Bird{
 
     public int getSpeed() {
-        return 2;
+        return 13;
     }
 
     @Override
