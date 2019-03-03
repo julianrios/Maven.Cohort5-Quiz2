@@ -2,24 +2,15 @@ package com.zipcodewilmington.assessment2.part1;
 
 public class BasicUtilities {
     public Boolean isGreaterThan5(Integer value) {
-        if(value >= 5) {
-            return true;
-        }
-        return false;
+        return value >= 5;
     }
 
     public Boolean isLessThan7(Integer value) {
-        if(value <= 7) {
-            return true;
-        }
-        return false;
+        return value <= 7;
     }
 
     public Boolean isBetween5And7(Integer valueToEvaluate) {
-        if(valueToEvaluate >= 5 && valueToEvaluate <= 7) {
-            return true;
-        }
-        return false;
+        return valueToEvaluate >= 5 && valueToEvaluate <= 7;
     }
 
     public Boolean startsWith(String string, Character character) {
@@ -28,5 +19,10 @@ public class BasicUtilities {
             return true;
         }
         return false;
+
+//        String lowerCaseString = string.toLowerCase();
+//        String charLowerCase = character.toString().toLowerCase();
+//
+//        return lowerCaseString.startsWith(charLowerCase);
     }
 }

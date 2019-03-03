@@ -1,10 +1,7 @@
 package com.zipcodewilmington.assessment2.part3;
 
 public class RedRobin extends Bird{
-    @Override
-    public String move() {
-        return "fly";
-    }
+    private String migrationMonth;
 
     @Override
     public int getSpeed() {
@@ -18,6 +15,11 @@ public class RedRobin extends Bird{
 
     @Override
     public String getMigrationMonth() {
-        return "August";
+        return migrationMonth;
+    }
+
+    @Override
+    public void setMigrationMonth(String migrationMonth) {
+        this.migrationMonth = migrationMonth;
     }
 }

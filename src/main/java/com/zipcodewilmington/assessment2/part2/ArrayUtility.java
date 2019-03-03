@@ -1,72 +1,98 @@
 package com.zipcodewilmington.assessment2.part2;
 
 
+import com.j256.ormlite.stmt.query.In;
+
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class ArrayUtility {
     public Integer[] merge(Integer[] array1, Integer[] array2) {
-        Integer[] merged = Arrays.copyOf(array1, array1.length + array2.length);
-        System.arraycopy(array2, 0, merged, array1.length, array2.length);
-        return merged;
+
+        int newLength = array1.length + array2.length;
+        Integer[] numbers = Arrays.copyOf(array1, newLength);
+
+        int insertPosition = array1.length;
+
+        for(Integer numberFromSecondArray : array2) {
+            numbers[insertPosition] = numberFromSecondArray;
+            insertPosition++;
+        }
+
+//        Shorter Way to copy array
+//        Integer[] merged = Arrays.copyOf(array1, array1.length + array2.length);
+//        System.arraycopy(array2, 0, merged, array1.length, array2.length);
+        return numbers;
     }
 
     public Integer[] rotate(Integer[] array, Integer index) {
-        return merge(Arrays.copyOfRange(array, index, array.length), Arrays.copyOfRange(array, 0, index));
+        Integer[] rotated = new Integer[array.length];
+        int rotatedIndex = 0;
+
+        //copy from the index to the end of the array
+        for(int i = index; i < array.length; i++) {
+            rotated[rotatedIndex] = array[i];
+            rotatedIndex++;
+        }
+
+        //copy the beginning up to the index
+        for (int i = 0; i < index; i++) {
+            rotated[rotatedIndex] = array[i];
+            rotatedIndex++;
+        }
+
+        return rotated;
+
+//        return merge(Arrays.copyOfRange(array, index, array.length),
+//                Arrays.copyOfRange(array, 0, index));
     }
 
     public Integer countOccurrence(Integer[] array1, Integer[] array2, Integer valueToEvaluate) {
-        Integer totalCountOccurrence = getNumberOfOccurrences(array1, valueToEvaluate)
-                + getNumberOfOccurrences(array2, valueToEvaluate);
-        return totalCountOccurrence;
+//        Integer totalCountOccurrence = getNumberOfOccurrences(array1, valueToEvaluate)
+//                + getNumberOfOccurrences(array2, valueToEvaluate);
+//        return totalCountOccurrence;
+        return count(array1, valueToEvaluate) + count(array2, valueToEvaluate);
     }
 
     public Integer countOccurrence(Integer[] array1, Integer valueToEvaluate) {
-        return Collections.frequency(Arrays.asList(array1), valueToEvaluate);
+        return count(array1, valueToEvaluate);
     }
 
-    public Integer mostCommon(Integer[] array) {
-        Integer mostCommon = array[0];
-        Integer mostCommonCOunt = 0;
-        for(Integer number : array) {
-            int occurences = countOccurrence(array, number);
-                if(occurences > mostCommonCOunt) {
-                    mostCommon = number;
-                    mostCommonCOunt = occurences;
-                }
-            }
-        return mostCommon;
+    public int count(Integer[] array, Integer valueToCount) {
+        int count = 0;
 
-
-
-
-//        int count = 1;
-//        int tempCount = 0;
-//        Integer popular = array[0];
-//        Integer temp = null;
-//        for (int i = 0; i < array.length-1; i ++) {
-//            temp = array[i];
-//            tempCount = 0;
-//            for (int j = 1; j < array.length; j++) {
-//                if(temp.equals(array[j])) {
-//                    tempCount++;
-//                }
-//                if (tempCount > count) {
-//                    popular = temp;
-//                    count = tempCount;
-//                }
-//            }
-//        }
-//        return popular;
-    }
-
-    Integer getNumberOfOccurrences(Object[] objectArray, Object objectToCount) {
-        Integer count = 0;
-        for(Object number : objectArray) {
-            if(number.equals(objectToCount)) {
+        for(Integer number: array) {
+            if(number == valueToCount) {
                 count++;
             }
         }
         return count;
+    }
+
+    public Integer mostCommon(Integer[] array) {
+//        int common = array[0];
+//        int commonCount = count(array, common);
+//
+//        for(Integer currentNumber : array) {
+//            int currentCount = count(array, currentNumber);
+//
+//            if(currentCount > commonCount) {
+//                common = currentNumber;
+//                commonCount = currentCount;
+//            }
+//        }
+//        return common;
+
+        Integer mostCommon = array[0];
+        Integer mostCommonCount = 0;
+        for(Integer number : array) {
+            int occurrences = countOccurrence(array, number);
+                if(occurrences > mostCommonCount) {
+                    mostCommon = number;
+                    mostCommonCount = occurrences;
+                }
+            }
+        return mostCommon;
     }
 }
